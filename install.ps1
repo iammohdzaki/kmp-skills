@@ -396,7 +396,7 @@ function Invoke-Update([string[]]$targets) {
     Print-Section "git pull -> $RepoRoot"
     Push-Location $RepoRoot
     try {
-        $out = git pull 2>&1
+        $out = cmd /c "git pull 2>&1"
         $out | ForEach-Object { Print-Info $_ }
         Print-Ok "git pull complete"
     } catch {

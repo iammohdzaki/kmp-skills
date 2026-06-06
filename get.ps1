@@ -92,7 +92,7 @@ if (Test-Path (Join-Path $InstallDir ".git")) {
     Step "Repo already cloned at $InstallDir -- pulling latest..."
     Push-Location $InstallDir
     try {
-        $out = git pull 2>&1
+        $out = cmd /c "git pull 2>&1"
         $out | ForEach-Object { Say "  $_" "DarkGray" }
         Ok "Repo updated"
     } catch {
@@ -108,7 +108,7 @@ if (Test-Path (Join-Path $InstallDir ".git")) {
             Err "Directory $InstallDir already exists and is not empty. Remove it or use -InstallDir to choose a different path."
         }
     }
-    git clone $RepoUrl $InstallDir 2>&1 | ForEach-Object { Say "  $_" "DarkGray" }
+    cmd /c "git clone `"$RepoUrl`" `"$InstallDir`" 2>&1" | ForEach-Object { Say "  $_" "DarkGray" }
     if (-not (Test-Path (Join-Path $InstallDir ".git"))) {
         Err "Clone failed. Check that $RepoUrl is accessible and try again."
     }
