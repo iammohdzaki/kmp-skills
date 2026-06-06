@@ -49,10 +49,16 @@ The single-module `composeApp` structure is dead. The `kmp-project-structure` sk
 
 You can install all skills across your IDEs with a single command. 
 
+### Windows (PowerShell)
 Open PowerShell and run:
-
 ```powershell
 irm https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.ps1 | iex
+```
+
+### Mac / Linux (Bash)
+Open your terminal and run:
+```bash
+curl -fsSL https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.sh | bash
 ```
 
 ### What the installer does:
