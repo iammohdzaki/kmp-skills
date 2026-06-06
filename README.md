@@ -1,174 +1,116 @@
-# kmp-skills
+<div align="center">
+  <h1>kmp-skills 🤖</h1>
+  <p><b>A powerful, version-controlled library of AI Skills for Kotlin Multiplatform.</b></p>
+  <p>Teach your AI (Antigravity, Claude, Cursor, Copilot) how to write modern, production-ready KMP code without hallucinations.</p>
 
-> A personal, version-controlled library of AI skills for Kotlin Multiplatform projects.
-> Install once — update everywhere with a single `git pull`.
-
----
-
-## What is this?
-
-`kmp-skills` is a monorepo of reusable **AI skills** (structured markdown guides) for:
-- Setting up KMP + MVI projects from scratch
-- Applying Material 3 design correctly in Compose Multiplatform
-- Resolving compatible KMP/AGP/CMP version combinations
-- Structuring the new AGP 9+ multi-module project layout
-
-Skills are written as `SKILL.md` files that AI assistants (Antigravity, Claude, Cursor, Windsurf)
-read to understand best practices, architecture patterns, and step-by-step workflows.
+  <p>
+    <a href="#installation">Installation</a> •
+    <a href="#features">Features</a> •
+    <a href="#ide-support">IDE Support</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
 
 ---
 
-## Skills
+## ⚡ What is this?
 
-| Category | Skill | Description |
+**kmp-skills** is a monorepo of reusable **AI skills** (structured markdown instructions and modular reference files). 
+
+Instead of copying and pasting the same prompts into every new project, you install this repo globally into your AI assistant. The AI learns exactly how to structure an AGP 9.0+ project, how to scaffold MVI architecture, how to resolve real library versions, and how to audit your Compose UI for Material 3 compliance.
+
+Install it once. Update it everywhere with a single `git pull`.
+
+---
+
+## ✨ Killer Features
+
+### 1. 🏗️ Interactive MVI Project Scaffold
+The `kmp-mvi-setup` skill doesn't just dump code. It asks you **8 pre-flight questions** (App Name, Target Platforms, DI, Networking, Serialization, Image Loading, Navigation, Local Storage).
+Based on your answers, the AI **dynamically loads only the necessary reference modules** to scaffold your app:
+* **Storage:** SQLDelight (KMP) or Room (Android/JVM) or DataStore
+* **Network:** Ktor + kotlinx.serialization
+* **DI:** Koin + constructor injection patterns
+* **Architecture:** Strict `UiState` / `UiEvent` / `UiEffect` data flow with a common `BaseViewModel`.
+
+### 2. 🎨 Material 3 Compliance Auditing
+The `material3` skill teaches your AI the complete Material Design 3 spec for Compose Multiplatform. 
+It features a **Compliance Audit System**. You can ask the AI to "Audit my UI", and it will generate a 12-category report (Color, Typography, Touch Targets, Contrast, Motion, etc.) grading your app from **A to F** with actionable code fixes. *(Adapted from [hamen/material-3-skill](https://github.com/hamen/material-3-skill))*
+
+### 3. 🛡️ Anti-Hallucination Version Protocol
+AIs are notoriously bad at guessing compatible Gradle versions for KMP, AGP, and Compose. The `kmp-versions` skill forces the AI to execute a strict **5-step live fetch protocol** — reading directly from official release pages (JetBrains, Android X, GitHub) before it ever writes a `libs.versions.toml` file.
+
+### 4. 📁 AGP 9.0+ Multi-Module Layout
+The single-module `composeApp` structure is dead. The `kmp-project-structure` skill enforces the new, modern KMP layout required for AGP 9.0+: a central `shared/` module surrounded by thin `androidApp/`, `desktopApp/`, and `iosApp/` shells.
+
+---
+
+## 🚀 Installation
+
+You can install all skills across your IDEs with a single command. 
+
+Open PowerShell and run:
+
+```powershell
+irm https://raw.githubusercontent.com/<YOUR_USERNAME>/kmp-skills/main/get.ps1 | iex
+```
+*(Note: Replace `<YOUR_USERNAME>` with your actual GitHub username once you fork/push this repo).*
+
+### What the installer does:
+1. Clones this repository to `~/.kmp-skills/`
+2. Creates **Directory Junctions** (symlinks) into Antigravity/Gemini (zero-copy, updates instantly on `git pull`).
+3. Safely appends a specific `<!-- kmp-skills:start -->` block into Claude's global `CLAUDE.md`.
+4. Registers a global `kmp-skills` command in your PowerShell profile.
+
+---
+
+## 💻 IDE Support & Strategies
+
+Because every AI tool stores global rules differently, the installer uses specific strategies for each:
+
+| AI Assistant | Strategy | Global Path |
 |---|---|---|
-| `create-project` | `kmp-mvi-setup` | Interactive MVI project scaffold with 8 module choices |
-| `create-project` | `kmp-versions` | Anti-hallucination version resolver (live fetch protocol) |
-| `create-project` | `kmp-project-structure` | New AGP 9+ multi-module layout (shared/ + androidApp/) |
-| `design-system` | `material3` | Full MD3 for KMP, compliance audit system (12 categories) |
+| **Antigravity / Gemini CLI** | **Junction** | `~\.gemini\config\skills\<skill>\` |
+| **Claude Code CLI** | **Append** | `~\.claude\CLAUDE.md` |
+| **Windsurf** | Append | `~\.codeium\windsurf\memories\global_rules.md` |
+| **Cursor** | Copy (`.mdc`) | `~\.kmp-skills\cursor-rules\` *(Junction this into project `.cursor/rules/`)* |
+| **GitHub Copilot (VS Code)** | Copy | `%APPDATA%\Code\User\prompts\kmp-skills.instructions.md` |
 
 ---
 
-## Installation
+## 🛠️ CLI Usage
 
-### Requirements
-- PowerShell 5.1+ (built into Windows)
-- Git (for the `update` command)
-
-### Install to Antigravity (global, junction-based)
+Once installed, you can manage your skills from any terminal using the `kmp-skills` command.
 
 ```powershell
-.\install.ps1
-```
+# See all available skills in the library
+kmp-skills list
 
-This creates **directory junctions** from Antigravity's skills folder into this repo.
-After this, `git pull` in this repo is all you ever need to update. No re-install.
+# Check sync status across all installed IDEs
+kmp-skills status -Target all
 
-### Install to all IDEs
+# Pull the latest community updates from GitHub and re-sync your IDEs
+kmp-skills update -Target all
 
-```powershell
-.\install.ps1 install -Target all
-```
+# Install specific skills to a local Cursor/Windsurf project
+kmp-skills install -Target cursor -Project D:\Projects\MyNextGreatApp
 
-### Install to a specific project (Cursor / Windsurf / Claude)
-
-```powershell
-.\install.ps1 install -Target cursor   -Project D:\Projects\MyApp
-.\install.ps1 install -Target windsurf -Project D:\Projects\MyApp
-.\install.ps1 install -Target claude   -Project D:\Projects\MyApp
+# Uninstall from a specific IDE
+kmp-skills uninstall -Target claude
 ```
 
 ---
 
-## Commands
+## 🤝 Contributing
 
-```powershell
-# Check installed version and sync status across all IDEs
-.\install.ps1 status -Target all
+This is a community-driven library. If a new library becomes popular in KMP, or an existing one changes its API, we want to know!
 
-# Pull latest from git and re-sync everything
-.\install.ps1 update -Target all
-
-# Install only one category
-.\install.ps1 install -Target antigravity -Category create-project
-
-# Install only one skill
-.\install.ps1 install -Target antigravity -SkillName kmp-mvi-setup
-
-# See all available skills
-.\install.ps1 list
-
-# Remove from an IDE
-.\install.ps1 uninstall -Target cursor -Project D:\Projects\MyApp
-```
+1. Check out the [CONTRIBUTING.md](CONTRIBUTING.md) for our skill writing guidelines.
+2. Ensure you use the `FETCH` protocol for versions instead of hardcoding them.
+3. Submit a Pull Request!
 
 ---
 
-## How Updates Work
+## 📜 License
 
-### Antigravity (junction strategy — zero effort updates)
-
-```
-kmp-skills/skills/create-project/kmp-mvi-setup/
-         ↑ (junction)
-~/.gemini/config/skills/kmp-mvi-setup   ← Antigravity reads this
-```
-
-When you `git pull` in `D:\Projects\kmp-skills`, Antigravity immediately sees the updated
-skills — no re-install needed. The junction points directly into the repo.
-
-### Claude / Cursor / Windsurf (copy + hash strategy)
-
-These IDEs don't reliably follow directory junctions. Skills are **copied** and tracked with
-a content hash manifest (`.kmp-skills-manifest.json`) in the install directory.
-
-To update after a `git pull`:
-
-```powershell
-.\install.ps1 update -Target all
-```
-
-This runs `git pull`, detects which skills changed (via hash comparison), and re-copies only
-the changed ones. Unchanged skills are skipped.
-
-### Status check — see what's out of date
-
-```powershell
-.\install.ps1 status -Target all
-```
-
-Output example:
-```
-── Status: antigravity  →  C:\Users\you\.gemini\config\skills
-   ✓ Version: 1.0.0  (up to date)
-   ✓ kmp-mvi-setup   [junction → D:\Projects\kmp-skills\skills\create-project\kmp-mvi-setup]
-   ✓ kmp-versions    [junction → D:\Projects\kmp-skills\skills\create-project\kmp-versions]
-
-── Status: cursor  →  C:\Users\you\.cursor\rules
-   ⚠ Version: installed=1.0.0  repo=1.1.0  (run: .\install.ps1 update -Target cursor)
-   ✓ kmp-mvi-setup  [copy — in sync]
-   ⚠ material3      [copy — OUTDATED — run update]
-```
-
----
-
-## Adding New Skills
-
-1. Copy the `skills/_template/` folder
-2. Rename it to your skill name under the right category
-3. Edit `SKILL.md`
-4. Bump `VERSION` and add a line to `CHANGELOG.md`
-5. Run `.\install.ps1 update -Target all`
-
-```
-skills/
-├── _template/
-│   └── SKILL.md          ← starter template
-├── create-project/
-│   ├── kmp-mvi-setup/
-│   │   ├── SKILL.md
-│   │   └── references/   ← optional module reference files
-│   ├── kmp-versions/
-│   └── kmp-project-structure/
-└── design-system/
-    └── material3/
-        ├── SKILL.md
-        └── references/
-```
-
----
-
-## IDE Global Install Paths
-
-| IDE | Strategy | Global Path |
-|---|---|---|
-| **Antigravity** | Junction (auto-update on git pull) | `~\.gemini\config\skills\` |
-| **Claude Code** | Copy | `~\.claude\skills\` |
-| **Cursor** | Copy `.mdc` files | `~\.cursor\rules\` |
-| **Windsurf** | Copy `.md` files | `~\.codeium\windsurf\rules\` |
-
----
-
-## Version History
-
-See [CHANGELOG.md](CHANGELOG.md).
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
