@@ -45,6 +45,57 @@ The single-module `composeApp` structure is dead. The `kmp-project-structure` sk
 
 ---
 
+## 💡 How to Use Your New AI Skills
+
+Once installed, your AI implicitly understands KMP best practices. You can trigger the skills naturally in your conversation.
+
+### Example 1: Scaffolding a new KMP Project
+**You say:** 
+> *"Create a new KMP project."*
+
+**AI responds:** 
+> *"Before I scaffold your KMP project, I need a few details:*
+> *1. App name & package*
+> *2. Target platforms (Android + Desktop + iOS?)*
+> *3. Dependency Injection (Koin or Manual?)*
+> *4. Local Storage (SQLDelight or DataStore?)*
+> *(...asks 8 pre-flight questions)..."*
+
+Once you answer, the AI will generate the perfect `build.gradle.kts` files, `libs.versions.toml`, and the `UiState`/`UiEvent` boilerplates specifically tailored to your choices.
+
+### Example 2: Material 3 Compliance Audit
+**You say:** 
+> *"Audit my `HomeScreen.kt` for Material 3 compliance."*
+
+**AI responds:**
+```text
+╔══════════════════════════════════════════════════════════╗
+║          MD3 COMPLIANCE AUDIT — HomeScreen.kt            ║
+║          KMP / Compose Multiplatform Edition             ║
+╚══════════════════════════════════════════════════════════╝
+
+Score: 8.5 / 10   Grade: B
+
+┌─────────────────────────────────────────────────────────┐
+│ CATEGORY RESULTS                                        │
+└─────────────────────────────────────────────────────────┘
+[✅]  COLOR SYSTEM          [PASS]
+[✅]  TYPOGRAPHY            [PASS]
+[⚠️]  SHAPE                 [WARN]
+[❌]  COMPONENTS            [FAIL]
+... (all 12 categories listed)
+
+┌─────────────────────────────────────────────────────────┐
+│ FINDINGS & FIXES                                        │
+└─────────────────────────────────────────────────────────┘
+🔴 COMPONENTS (Fail): The `Icon` on line 45 is missing a `minimumInteractiveComponentSize()`.
+🟡 SHAPE (Warn): Hardcoded `RoundedCornerShape(8.dp)`. Use `MaterialTheme.shapes.small`.
+
+Would you like me to apply these fixes?
+```
+
+---
+
 ## 🚀 Installation
 
 You can install all skills across your IDEs with a single command. 

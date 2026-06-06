@@ -207,7 +207,7 @@ function Install-Agy([array]$skills) {
                     continue
                 }
                 Print-Step "Re-linking $name  (source path changed)"
-                Remove-Item $jDest -Force
+                cmd /c rmdir `"$jDest`"
             } elseif ($Force) {
                 Print-Step "Removing existing dir for $name  (-Force)"
                 Remove-Item $jDest -Recurse -Force
