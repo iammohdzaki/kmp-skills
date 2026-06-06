@@ -52,9 +52,8 @@ You can install all skills across your IDEs with a single command.
 Open PowerShell and run:
 
 ```powershell
-irm https://raw.githubusercontent.com/<YOUR_USERNAME>/kmp-skills/main/get.ps1 | iex
+irm https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.ps1 | iex
 ```
-*(Note: Replace `<YOUR_USERNAME>` with your actual GitHub username once you fork/push this repo).*
 
 ### What the installer does:
 1. Clones this repository to `~/.kmp-skills/`

@@ -31,13 +31,13 @@
 
 .EXAMPLES
     # Basic (Antigravity/Gemini only)
-    irm https://raw.githubusercontent.com/YOUR_USERNAME/kmp-skills/main/get.ps1 | iex
+    irm https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.ps1 | iex
 
     # All IDEs
-    iex "& { $(irm https://raw.githubusercontent.com/YOUR_USERNAME/kmp-skills/main/get.ps1) } -Target all"
+    iex "& { $(irm https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.ps1) } -Target all"
 
     # Specify a custom install directory
-    iex "& { $(irm https://raw.githubusercontent.com/YOUR_USERNAME/kmp-skills/main/get.ps1) } -InstallDir D:\Tools\kmp-skills"
+    iex "& { $(irm https://raw.githubusercontent.com/iammohdzaki/kmp-skills/main/get.ps1) } -InstallDir D:\Tools\kmp-skills"
 #>
 
 param(
@@ -49,7 +49,7 @@ param(
     [switch]$NoAlias
 )
 
-$RepoUrl = "https://github.com/YOUR_USERNAME/kmp-skills.git"
+$RepoUrl = "https://github.com/iammohdzaki/kmp-skills.git"
 $ErrorActionPreference = "Stop"
 
 # ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ function Step($msg) { Say ">>     $msg" "Cyan" }
 Write-Host ""
 Write-Host "  ============================================" -ForegroundColor DarkCyan
 Write-Host "   kmp-skills  --  KMP AI Skills Installer   " -ForegroundColor Cyan
-Write-Host "   https://github.com/YOUR_USERNAME/kmp-skills" -ForegroundColor DarkGray
+Write-Host "   https://github.com/iammohdzaki/kmp-skills" -ForegroundColor DarkGray
 Write-Host "  ============================================" -ForegroundColor DarkCyan
 Write-Host ""
 Say "Target  : $Target"
